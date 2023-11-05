@@ -8,7 +8,8 @@ class MeroEvent {
   final String name;
   @JsonKey(name: 'image_path')
   final String imagePath;
-  final List<int> categories;
+  @JsonKey(name: 'category_id')
+  final int categoryId;
   @JsonKey(name: 'is_membered')
   bool isMembered;
   int members;
@@ -27,7 +28,7 @@ class MeroEvent {
     required this.id,
     required this.name,
     required this.imagePath,
-    required this.categories,
+    required this.categoryId,
     required this.members,
     required this.isMembered,
     required this.date,

@@ -17,21 +17,22 @@ class MainEventsScreenWidget extends StatefulWidget {
 
 class MainEventsScreenWidgetState extends State<MainEventsScreenWidget> {
   int? categoryId;
-  final CategoryWidgetModel categoryWidgetModel = CategoryWidgetModel();
+  // final CategoryWidgetModel categoryWidgetModel = CategoryWidgetModel();
   final MeroEventWidgetModel eventWidgetModel = MeroEventWidgetModel();
 
   @override
   void initState() {
     super.initState();
-    categoryWidgetModel.setupData();
+    eventWidgetModel.setupData();
+    // categoryWidgetModel.setupData();
   }
 
-  void setCategory(int categoryID, String categoryName) {
-    categoryWidgetModel.applyCategory(categoryID);
-    final int? newCategoryID = categoryWidgetModel.lastParent;
-    eventWidgetModel.setCategory(newCategoryID, categoryName);
-    eventWidgetModel.setupData();
-  }
+  // void setCategory(int categoryID, String categoryName) {
+  //   categoryWidgetModel.applyCategory(categoryID);
+  //   final int? newCategoryID = categoryWidgetModel.lastParent;
+  //   eventWidgetModel.setCategory(newCategoryID, categoryName);
+  //   eventWidgetModel.setupData();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -40,17 +41,23 @@ class MainEventsScreenWidgetState extends State<MainEventsScreenWidget> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ChangeNotifierProvider.value(
-            value: categoryWidgetModel,
-            child: ChangeNotifierProvider.value(
-                value: eventWidgetModel, child: _PseudoAppBar()),
-          ),
+              value: eventWidgetModel, child: _PseudoAppBar()),
           Expanded(
             child: ChangeNotifierProvider.value(
-                value: eventWidgetModel,
-                child: ChangeNotifierProvider.value(
-                    value: categoryWidgetModel,
-                    child: const _CurrentContent())),
-          ),
+                value: eventWidgetModel, child: const _CurrentContent()),
+          )
+          // ChangeNotifierProvider.value(
+          //   value: categoryWidgetModel,
+          //   child: ChangeNotifierProvider.value(
+          //       value: eventWidgetModel, child: _PseudoAppBar()),
+          // ),
+          // Expanded(
+          //   child: ChangeNotifierProvider.value(
+          //       value: eventWidgetModel,
+          //       child: ChangeNotifierProvider.value(
+          //           value: categoryWidgetModel,
+          //           child: const _CurrentContent())),
+          // ),
         ],
       ),
     );
@@ -64,13 +71,15 @@ class _CurrentContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final MeroEventWidgetModel eventWidgetModel =
         context.watch<MeroEventWidgetModel>();
-    final CategoryWidgetModel categoryWidgetModel =
-        context.read<CategoryWidgetModel>();
-    return (eventWidgetModel.categoryChosen
-        ? ChangeNotifierProvider.value(
-            value: eventWidgetModel, child: const MeroEventViewWidget())
-        : ChangeNotifierProvider.value(
-            value: categoryWidgetModel, child: const CategoriesViewWidget()));
+    // final CategoryWidgetModel categoryWidgetModel =
+    //     context.read<CategoryWidgetModel>();
+    return (
+            // eventWidgetModel.categoryChosen ?
+            ChangeNotifierProvider.value(
+                value: eventWidgetModel, child: const MeroEventViewWidget())
+        // : ChangeNotifierProvider.value(
+        //     value: categoryWidgetModel, child: const CategoriesViewWidget())
+        );
   }
 }
 
@@ -84,108 +93,87 @@ class _PseudoAppBar extends StatelessWidget {
     return SafeArea(
       child: Container(
         width: double.infinity,
-        color: Colors.white,
+        color: MyColors.black,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: model.categoryChosen
-                  ? Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        IconButton(
-                            onPressed: () {
-                              model.setCategory(null, null);
-                              CategoryWidgetModel catModel =
-                                  context.read<CategoryWidgetModel>();
-                              catModel
-                                  .applyCategory(catModel.categories.last.id);
-                            },
-                            icon: const Icon(
-                              Icons.arrow_back_ios_new,
-                              color: MyColors.lavender,
-                            )),Text(
-                          model.categoryName,
-                          style: MontserratTextStyles.titleFine24,
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(vertical: 8),
+            //   child: model.categoryChosen
+            //       ? const Row(
+            //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //           mainAxisSize: MainAxisSize.max,
+            //           children: [
+            //             // IconButton(
+            //             //     onPressed: () {
+            //             //       model.setCategory(null, null);
+            //             //       CategoryWidgetModel catModel =
+            //             //           context.read<CategoryWidgetModel>();
+            //             //       catModel
+            //             //           .applyCategory(catModel.categories.last.id);
+            //             //     },
+            //             //     icon: const Icon(
+            //             //       Icons.arrow_back_ios_new,
+            //             //       color: MyColors.lavender,
+            //             //     )),Text(
+            //             //   model.categoryName,
+            //             //   style: MontserratTextStyles.titleFine24,
+            //             // ),
+            //             SizedBox(width: 40)
+            //           ]
+            //         )
+            //       : Text(
+            //           model.categoryName,
+            //           style: MontserratTextStyles.titleFine24,
+            //         ),
+            // ),
+            (
+                // model.categoryChosen ?
+                Container(
+              height: 58,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: TextField(
+                  textAlignVertical: TextAlignVertical.bottom,
+                  controller: _searchBarTextController,
+                  style: MontserratTextStyles.inputTextStyle,
+                  cursorColor: MyColors.white,
+                  decoration: InputDecoration(
+                      // isDense: true,
+                      filled: true,
+                      fillColor: MyColors.gray,
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 8),
+                      labelStyle: const TextStyle(
+                          color: MyColors.white,
+                          fontFamily: 'Montserrat',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500),
+                      label: const Padding(
+                        padding: EdgeInsets.only(left: 12, right: 12),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Поиск'),
+                          ],
                         ),
-                        const SizedBox(width: 40)
-                      ]
-                    )
-                  : Text(
-                      model.categoryName,
-                      style: MontserratTextStyles.titleFine24,
-                    ),
-            ),
-            (model.categoryChosen
-                ? Container(
-                    height: 64,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    decoration: const BoxDecoration(boxShadow: [
-                      BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 12,
-                          offset: Offset(0, 4))
-                    ]),
-                    child: TextField(
-                        textAlignVertical: TextAlignVertical.bottom,
-                        controller: _searchBarTextController,
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Montserrat',
-                            fontSize: 24,
-                            letterSpacing: 1),
-                        cursorColor: MyColors.lavender,
-                        decoration: InputDecoration(
-                            // isDense: true,
-                            filled: true,
-                            fillColor: Colors.white,
-                            contentPadding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 8),
-                            labelStyle: const TextStyle(
-                                color: MyColors.gray,
-                                fontFamily: 'Montserrat',
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500),
-                            label: Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 12, right: 12),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: const [
-                                  Text('Поиск'),
-                                  SizedBox(
-                                    height: 40,
-                                    width: 40,
-                                    child: ImageIcon(
-                                      AssetImage(
-                                          'assets/sliders-horizontal.png'),
-                                      color: MyColors.lavender,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            border: OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(style: BorderStyle.none),
-                                borderRadius: BorderRadius.circular(10)),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    style: BorderStyle.solid,
-                                    color: MyColors.lightGray),
-                                borderRadius: BorderRadius.circular(10)),
-                            floatingLabelBehavior: FloatingLabelBehavior.never),
-                        onSubmitted: (text) => model.searchEvents(text)),
-                  )
-                : const Text(
-                    'Здесь ты точно найдешь, чем заняться',
-                    style: MontserratTextStyles.eventInfo14,
-                  ))
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                            style: BorderStyle.none),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              style: BorderStyle.solid, color: MyColors.gray),
+                          borderRadius: BorderRadius.circular(10)),
+                      floatingLabelBehavior: FloatingLabelBehavior.never),
+                  onSubmitted: (text) => model.searchEvents(text)),
+            )
+            // : const Text(
+            //     'Здесь ты точно найдешь, чем заняться',
+            //     style: MontserratTextStyles.eventInfo14,)
+            )
           ],
         ),
       ),

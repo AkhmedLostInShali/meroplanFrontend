@@ -11,10 +11,10 @@ class MeroEventWidgetModel extends ChangeNotifier {
   late int _totalPages;
   bool _isLoading = false;
   bool get isLoaded => !_isLoading;
-  int? _categoryID;
-  String? _categoryName;
-  String get categoryName => _categoryName != null ? _categoryName! : 'Meroplan';
-  bool get categoryChosen => _categoryID != null;
+  // int? _categoryID;
+  // String? _categoryName;
+  // String get categoryName => _categoryName != null ? _categoryName! : 'Meroplan';
+  // bool get categoryChosen => _categoryID != null;
   String? _searchQuery;
 
   Future<void> setupData() async {
@@ -33,7 +33,7 @@ class MeroEventWidgetModel extends ChangeNotifier {
 
     try {
       final response = await _apiClient.getEvents(
-          page: nextPage, categoryId: _categoryID, searchQuery: _searchQuery);
+          page: nextPage, searchQuery: _searchQuery);
       _events.addAll(response.meroEvents);
       _totalPages = response.totalPages;
       _currentPage = nextPage;
@@ -57,11 +57,11 @@ class MeroEventWidgetModel extends ChangeNotifier {
 
   void createEvent() => {};
 
-  void setCategory(int? categoryID, String? categoryName) {
-    _categoryID = categoryID;
-    _categoryName = categoryName;
-    reloadEvents();
-  }
+  // void setCategory(int? categoryID, String? categoryName) {
+  //   _categoryID = categoryID;
+  //   _categoryName = categoryName;
+  //   reloadEvents();
+  // }
 
   void searchEvents(String searchQuery) {
     _searchQuery = searchQuery;
@@ -93,6 +93,113 @@ class MeroEventWidgetModel extends ChangeNotifier {
   //     arguments: id,
   //   )
   // }
+}
+
+
+class FilterEventWidgetModel extends MeroEventWidgetModel {
+  String? _firstDateFilter;
+  String get firstDate => _firstDateFilter ?? '';
+  String? _lastDateFilter;
+  String get lastDate => _lastDateFilter ?? '';
+  String? _addressFilter;
+  String get address => _addressFilter ?? '';
+  String? _minMemberFilter;
+  String get minMember => _minMemberFilter ?? '';
+  String? _maxMemberFilter;
+  String get maxMember => _maxMemberFilter ?? '';
+  String? _sortingFilter = 'basic';
+  bool get isBaseSorting => _sortingFilter == 'basic';
+  bool _isOpened = true;
+  bool get isOpened => _isOpened;
+  String? _categoryFilter;
+  String? get category => _categoryFilter;
+
+  @override
+  Future<void> setupData() async {
+    if (_events != []) {
+      _currentPage = 0;
+      _totalPages = 1;
+      _loadEvents();
+    }
+  }
+
+  void switchOpenState() {
+    _isOpened = !_isOpened;
+    notifyListeners();
+  }
+
+  void setCategoryFilter(String categoryFilter) {
+    _categoryFilter = _categoryFilter == categoryFilter ? null : categoryFilter;
+    notifyListeners();
+  }
+
+  void setFirstDateFilter(String? firstDateFilter) {
+    _firstDateFilter = firstDateFilter;
+    // notifyListeners();
+  }
+
+  void setLastDateFilter(String? lastDateFilter) {
+    _lastDateFilter = lastDateFilter;
+    // notifyListeners();
+  }
+
+  void setAddressFilter(String? addressFilter) {
+    _addressFilter = addressFilter;
+    // notifyListeners();
+  }
+
+  void setMinMemberFilter(String? minMemberFilter) {
+    _minMemberFilter = minMemberFilter;
+    // notifyListeners();
+  }
+
+  void setMaxMemberFilter(String? maxMemberFilter) {
+    _maxMemberFilter = maxMemberFilter;
+    // notifyListeners();
+  }
+
+  void setSortingFilter(String? sortingFilter) {
+    _sortingFilter = sortingFilter;
+    // notifyListeners();
+  }
+
+  @override
+  void searchEvents(String searchQuery) {
+    _searchQuery = searchQuery;
+    reloadEvents();
+  }
+
+  @override
+  Future<void> _loadEvents() async {
+    if (_isLoading || _currentPage >= _totalPages) return;
+    _isLoading = true;
+    notifyListeners();
+    final int nextPage = _currentPage + 1;
+
+    try {
+      final response = await _apiClient.getFilteredEvents(
+          page: nextPage, searchQuery: _searchQuery,
+          firstDate: _firstDateFilter, lastDate: _lastDateFilter,
+          minMember: _minMemberFilter, maxMember: _maxMemberFilter,
+          address: _addressFilter, category: _categoryFilter);
+      _events.addAll(response.meroEvents);
+      _totalPages = response.totalPages;
+      _currentPage = nextPage;
+      _isLoading = false;
+      _isOpened = false;
+      notifyListeners();
+    } catch (e) {
+      _isLoading = false;
+    }
+  }
+
+  @override
+  Future<void> reloadEvents() async {
+    _events.clear();
+    setupData();
+    // _loadProducts();
+  }
+
 }
 
 // class ProductModelProvider extends InheritedNotifier {

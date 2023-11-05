@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:hacaton/domain/data_providers/auth_token_data_provider.dart';
 
-String serverRootPath = 'https://7f8a-188-0-169-218.eu.ngrok.io/';
+String serverRootPath = 'https://ccad-46-39-51-44.ngrok-free.app/';
 
 class ApiClient {
   final HttpClient client = HttpClient();

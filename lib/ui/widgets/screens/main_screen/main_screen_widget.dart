@@ -3,6 +3,7 @@ import 'package:hacaton/ui/theme/my_colors.dart';
 import 'package:hacaton/ui/theme/my_text_styles.dart';
 import 'package:hacaton/ui/widgets/entity_models/user_page_model.dart';
 import 'package:hacaton/ui/widgets/fancy_widgets/fancy_icon.dart';
+import 'package:hacaton/ui/widgets/screens/main_screen/filter_events_widget.dart';
 import 'package:hacaton/ui/widgets/screens/main_screen/main_events_widget.dart';
 import 'package:hacaton/ui/widgets/screens/main_screen/user_page_widget.dart';
 
@@ -20,12 +21,12 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white);
   static const List<Widget> _widgetOptions = <Widget>[
-    // UserPageWidget(),
     MainEventsScreenWidget(),
-    Text(
-      'Index 1: Friends',
-      style: optionStyle,
-    ),
+    FilterEventsScreenWidget(),
+    // Text(
+    //   'Index 2: Add Event',
+    //   style: optionStyle,
+    // ),
     Text(
       'Index 2: Add Event',
       style: optionStyle,
@@ -34,32 +35,8 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
       'Index 3: My Events',
       style: optionStyle,
     ),
-    Text(
-      'Index 4: My Profile',
-      style: optionStyle,
-    ),
+    UserPageWidget(),
   ];
-  static final List<PreferredSizeWidget?> _appBarOptions =
-      <PreferredSizeWidget?>[
-    null,
-    null,
-    null,
-    AppBar(
-      centerTitle: true,
-      title: const Text(
-        'Мои мероприятия',
-        style: MontserratTextStyles.titleFine24,
-      ),
-    ),
-    AppBar(
-      centerTitle: true,
-      title: const Text(
-        'Профиль',
-        style: MontserratTextStyles.titleFine24,
-      ),
-    ),
-  ];
-
   void _onItemTapped(int index) {
     switch (index) {
       case 2:
@@ -80,7 +57,22 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: _appBarOptions.elementAt(_selectedTab),
+      appBar: AppBar(
+        backgroundColor: MyColors.black,
+        shadowColor: Colors.transparent,
+        title: const Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Image(image: AssetImage('assets/tut.png')),
+            SizedBox(width: 8,),
+            Padding(
+              padding: EdgeInsets.only(bottom: 2),
+              child: Text('ты точно найдешь, чем заняться', style: MontserratTextStyles.eventSponsorsName16),
+            )
+          ],
+        ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedTab,
         iconSize: 40,
@@ -89,7 +81,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
               icon: SizedBox(
                 height: 40,
                 child: SmallIcon(
-                  path: MyIcons.home, black: false,
+                  path: MyIcons.home, white: false,
                 ),
               ),
               activeIcon: SizedBox(
@@ -104,14 +96,14 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
               icon: SizedBox(
                 height: 40,
                 child: SmallIcon(
-                  path: MyIcons.friends, black: false,
+                  path: MyIcons.search, white: false,
                 ),
               ),
               activeIcon: SizedBox(
                 height: 40,
                 width: 40,
                 child: ActiveSmallIcon(
-                  path: MyIcons.friends,
+                  path: MyIcons.search,
                 ),
               ),
               label: ''),
@@ -120,7 +112,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
                 height: 40,
                 width: 40,
                 child: SmallIcon(
-                  path: MyIcons.addCircle, black: false,
+                  path: MyIcons.addCircle, white: false,
                 ),
               ),
               activeIcon: SizedBox(
@@ -135,7 +127,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
               icon: SizedBox(
                 height: 40,
                 child: SmallIcon(
-                  path: MyIcons.calendar, black: false,
+                  path: MyIcons.calendar, white: false,
                 ),
               ),
               activeIcon: SizedBox(
@@ -150,7 +142,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
               icon: SizedBox(
                 height: 40,
                 child: SmallIcon(
-                  path: MyIcons.user, black: false,
+                  path: MyIcons.user, white: false,
                 ),
               ),
               activeIcon: SizedBox(
@@ -167,9 +159,9 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
         onTap: _onItemTapped,
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        selectedItemColor: MyColors.lavender,
+        selectedItemColor: MyColors.white,
         unselectedItemColor: MyColors.semiGray,
-        backgroundColor: Colors.white,
+        backgroundColor: MyColors.black,
       ),
       body: Center(
         child: IndexedStack(

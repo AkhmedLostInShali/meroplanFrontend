@@ -7,20 +7,19 @@ part 'my_profile.g.dart';
 class MyProfile {
   final String id;
   final String? name;
+  final String? surname;
+  final String? nickname;
   final String phone;
-  final String rank;
   @JsonKey(name: 'image_path')
   final String? imagePath;
-  @JsonKey(name: 'address_list')
-  final List<Address> addressList;
 
   MyProfile({
     required this.id,
     required this.name,
+    this.surname,
+    this.nickname,
     this.imagePath,
     required this.phone,
-    required this.rank,
-    required this.addressList,
   });
 
   factory MyProfile.fromJson(Map<String, dynamic> json) => _$MyProfileFromJson(json);

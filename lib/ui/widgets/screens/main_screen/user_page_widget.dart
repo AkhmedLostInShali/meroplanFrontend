@@ -77,11 +77,11 @@ class _UserCardWidget extends StatelessWidget {
     if (model == null) {
       return const SizedBox.shrink();
     }
-    return Shimmer(
+    return const Shimmer(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: const [
+        children: [
           _UserAvatarWidget(),
           Padding(
             padding: EdgeInsets.all(16.0),
@@ -140,7 +140,7 @@ class _NameTitleBar extends StatelessWidget {
                 color: profile == null ? MyColors.ghostDarkGray : null),
             child: isLoading
                 ? null
-                : ((model.myProfile?.name != '')
+                : ((model.myProfile?.name != null)
                     ? Text(
                         model.myProfile!.name!,
                         style: MontserratTextStyles.fine32,
@@ -150,7 +150,7 @@ class _NameTitleBar extends StatelessWidget {
 }
 
 class _AddNameButton extends StatelessWidget {
-  const _AddNameButton({Key? key}) : super(key: key);
+  const _AddNameButton({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -22,7 +22,7 @@ TextStyle errorTextStyle = TextStyle(
     color: Colors.deepOrangeAccent.shade700);
 
 class AuthWidget extends StatelessWidget {
-  const AuthWidget({Key? key}) : super(key: key);
+  const AuthWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,16 +49,16 @@ class AuthWidget extends StatelessWidget {
 }
 
 class _HeaderWidget extends StatelessWidget {
-  const _HeaderWidget({Key? key}) : super(key: key);
+  const _HeaderWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10.0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: const [
+        children: [
           SizedBox(height: 2),
           Text(
             'Авторизация',
@@ -80,8 +80,8 @@ class _HeaderWidget extends StatelessWidget {
 
 class _ActionMessageWidget extends StatelessWidget {
   const _ActionMessageWidget({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +96,7 @@ class _ActionMessageWidget extends StatelessWidget {
 }
 
 class _FormWidget extends StatelessWidget {
-  const _FormWidget({Key? key}) : super(key: key);
+  const _FormWidget({super.key});
 
   void _getCode() {}
 
@@ -104,16 +104,16 @@ class _FormWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const _AuthInputField(),
-        const _ErrorMessageWidget(),
-        const SizedBox(height: 2),
+        _AuthInputField(),
+        _ErrorMessageWidget(),
+        SizedBox(height: 2),
         Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             _AuthButtonWidget(),
           ],
         ),
@@ -123,7 +123,7 @@ class _FormWidget extends StatelessWidget {
 }
 
 class _AuthInputField extends StatelessWidget {
-  const _AuthInputField({Key? key}) : super(key: key);
+  const _AuthInputField({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +134,7 @@ class _AuthInputField extends StatelessWidget {
 }
 
 class _PhoneNumberField extends StatelessWidget {
-  const _PhoneNumberField({Key? key}) : super(key: key);
+  const _PhoneNumberField({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -151,9 +151,10 @@ class _PhoneNumberField extends StatelessWidget {
           hintText: '+7 (000) 000 00-00',
           hintStyle: TextStyle(color: Colors.white, fontSize: 24),
         ),
+        keyboardType: TextInputType.number,
         inputFormatters: [
           MaskTextInputFormatter(
-              mask: '+7 (###) ###-##-##',
+              mask: '+# (###) ###-##-##',
               filter: {"#": RegExp(r'[0-9]')},
               type: MaskAutoCompletionType.lazy),
         ],
@@ -164,7 +165,7 @@ class _PhoneNumberField extends StatelessWidget {
 }
 
 class _CodeField extends StatelessWidget {
-  const _CodeField({Key? key}) : super(key: key);
+  const _CodeField({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -180,6 +181,7 @@ class _CodeField extends StatelessWidget {
             border: InputBorder.none,
             hintText: '0000',
             hintStyle: TextStyle(color: Colors.white, fontSize: 24)),
+        keyboardType: TextInputType.number,
         inputFormatters: [
           MaskTextInputFormatter(
               mask: '####',
@@ -193,7 +195,7 @@ class _CodeField extends StatelessWidget {
 }
 
 class _AuthButtonWidget extends StatelessWidget {
-  const _AuthButtonWidget({Key? key}) : super(key: key);
+  const _AuthButtonWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -207,8 +209,8 @@ class _AuthButtonWidget extends StatelessWidget {
 
 class _GetCodeButtonWidget extends StatelessWidget {
   const _GetCodeButtonWidget({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -241,8 +243,8 @@ class _GetCodeButtonWidget extends StatelessWidget {
 
 class _LogInButtonWidget extends StatelessWidget {
   const _LogInButtonWidget({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -278,8 +280,8 @@ class _LogInButtonWidget extends StatelessWidget {
 
 class _ErrorMessageWidget extends StatelessWidget {
   const _ErrorMessageWidget({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

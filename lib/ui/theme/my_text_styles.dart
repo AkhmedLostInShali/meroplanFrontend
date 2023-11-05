@@ -8,9 +8,15 @@ class MontserratTextStyles {
 
   static const TextStyle fine16 = TextStyle(fontFamily: 'montserrat', fontSize: 16);
 
+  static const TextStyle inputTextStyle = TextStyle(
+      color: MyColors.white,
+      fontFamily: 'Montserrat',
+      fontSize: 24,
+      letterSpacing: 1);
+
   static const TextStyle titleFine24 = TextStyle(
       fontFamily: 'Montserrat', fontWeight: FontWeight.w700,
-      fontSize: 24, color: MyColors.lavender);
+      fontSize: 24, color: MyColors.lavender, overflow: TextOverflow.clip);
 
   static const TextStyle categoryTitle20 = TextStyle(
       fontFamily: 'Montserrat', fontWeight: FontWeight.w700,
@@ -18,19 +24,19 @@ class MontserratTextStyles {
 
   static const TextStyle eventName14 = TextStyle(
       fontFamily: 'Montserrat', fontWeight: FontWeight.w700,
-      fontSize: 14, color: Colors.black, overflow: TextOverflow.ellipsis);
+      fontSize: 14, color: MyColors.white, overflow: TextOverflow.clip);
 
   static const TextStyle eventInfo14 = TextStyle(
       fontFamily: 'Montserrat', fontWeight: FontWeight.w500,
-      fontSize: 14, color: Colors.black, overflow: TextOverflow.ellipsis);
+      fontSize: 14, color: MyColors.white, overflow: TextOverflow.ellipsis);
 
   static const TextStyle eventSponsorsName16 = TextStyle(
       fontFamily: 'Montserrat', fontWeight: FontWeight.w700,
-      fontSize: 16, color: Colors.black, overflow: TextOverflow.ellipsis);
+      fontSize: 16, color: MyColors.white, overflow: TextOverflow.ellipsis);
 
   static const TextStyle fine28 = TextStyle(
       fontFamily: 'Montserrat', fontSize: 28);
 
   static const TextStyle fine32 = TextStyle(
-      fontFamily: 'Montserrat', fontSize: 32);
+      fontFamily: 'Montserrat', color: Colors.black, fontSize: 32);
 }

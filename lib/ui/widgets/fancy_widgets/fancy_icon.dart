@@ -6,6 +6,8 @@ class MyIcons {
 
   static const String friends = 'assets/friends.png';
 
+  static const String search = 'assets/search.png';
+
   static const String addCircle = 'assets/plus-circle.png';
 
   static const String user = 'assets/user.png';
@@ -20,9 +22,9 @@ class MyIcons {
 
 class SmallIcon extends StatelessWidget {
   final String path;
-  final bool black;
+  final bool white;
 
-  const SmallIcon({Key? key, required this.path, required this.black}) : super(key: key);
+  const SmallIcon({Key? key, required this.path, required this.white}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class SmallIcon extends StatelessWidget {
         child: ClipRect(
           child: ImageIcon(
             AssetImage(path),
-            color: black ? Colors.black : MyColors.semiGray,
+            color: white ? MyColors.white : MyColors.semiGray,
           ),
         ),
       ),
@@ -51,12 +53,9 @@ class ActiveSmallIcon extends StatelessWidget {
         child: Container(
             height: 40,
             width: 40,
-            decoration: const BoxDecoration(
-                color: MyColors.lavender,
-                borderRadius: BorderRadius.all(Radius.circular(10))),
             child: ImageIcon(
               AssetImage(path),
-              color: Colors.white,
+              color: MyColors.white,
             )),
       ),
     ]);
@@ -75,9 +74,6 @@ class ActiveCircleIcon extends StatelessWidget {
         child: Container(
             height: 50,
             width: 50,
-            decoration: const BoxDecoration(
-                color: MyColors.lavender,
-                shape: BoxShape.circle),
             child: ImageIcon(
               AssetImage(path),
               color: Colors.white,

@@ -6,9 +6,10 @@ class MyAppModel {
   bool get isAuth => _isAuth;
 
   Future<void> checkAuth() async {
-    _tokenDataProvider.setAuthToken("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjoiM2pScmpiR2IiLCJ1c2VyX3NlY3JldCI6InBia2RmMjpzaGEyNTY6MjYwMDAwJDFQUWVET1pQTVAwTWJBSUQkNzczZjAxZmI1NzI0ZDk0Y2E1NDg1NWJkYWNlZGFjMDgxODcwM2ViODQ2N2I1OTE3NTZkMmMxMTU0YTlkYjg5NSIsInBob25lIjoiNzk4OTkzMjk4NTciLCJleHBpcmVzX2F0IjoiMjAyMy0wMS0yNlQwNToxMTowNS43OTkxNDUifQ.qungYjezE2fSI3cHyQP-2B6Uhk18JbdTj-Q75zFRUA0CTxfh34tje2Ng2jOFqLKw_ZsT_ZmX7a3n6PzBs-DBUQ");
+    // _tokenDataProvider.setAuthToken(null);
+    // _tokenDataProvider.setAuthToken("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjoiZlFiNjdzSUUiLCJ1c2VyX3NlY3JldCI6InBia2RmMjpzaGEyNTY6MjYwMDAwJFAxYnJtZkxWcFdET2cwM24kMjYyYzc1NzI0ZDNkZTc2NWVjNDJiYmRiMWJkYjM4NmI1NzY0ZWRhZDRjYjA0NTE5NDQyMjc5N2VkYmRiMzljYSIsInBob25lIjoiNzk4OTkzMjk4NTciLCJleHBpcmVzX2F0IjoiMjAyMy0xMi0wMVQyMDoxNjozMy4wMzg5NTkifQ.hBDBHTEmCUPMGmiKcjTf1vIm4kuGq1T1-CYYFuIe--xMaNiUUG7H1XMCdGbpl4Hot5MCbTvbSnnEgsX3qL3i3A");
     final authToken = await _tokenDataProvider.getAuthToken();
-    print(authToken);
+    // print(authToken);
     _isAuth = authToken != null;
   }
 }

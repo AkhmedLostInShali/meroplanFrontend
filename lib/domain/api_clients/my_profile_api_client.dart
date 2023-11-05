@@ -21,6 +21,7 @@ class MyProfileApiClient extends ApiClient {
     String? token = await authTokenProvider.getAuthToken();
     final request = await client.putUrl(url
         .replace(queryParameters: parameters));
+    request.headers.set("Content-Type", "application/json; charset=utf-8");
     request.headers.set('x-access-token', token!);
     request.write(parameters);
     final response = await request.close();

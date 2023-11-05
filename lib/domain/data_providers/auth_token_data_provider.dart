@@ -8,7 +8,6 @@ class AuthTokenDataProvider {
   static const _secureStorage = FlutterSecureStorage();
 
   Future<String?> getAuthToken() => _secureStorage.read(key: _Keys.authToken);
-  // Future<String?> getAuthToken() => Future(() => null);
 
   Future<void> setAuthToken(String? token) {
     if (token != null) {

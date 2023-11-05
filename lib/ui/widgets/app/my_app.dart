@@ -13,22 +13,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     MaterialApp app = MaterialApp(
       theme: ThemeData(
-        backgroundColor: MyColors.lightGray,
-        appBarTheme: const AppBarTheme(
-            titleTextStyle: TextStyle(
-                fontFamily: 'Montserrat',
-                fontSize: 32,
-                color: MyColors.lavender),
-            color: Colors.white,
-            elevation: 8),
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: MyColors.lightGray,),
+        colorScheme: const ColorScheme.dark(background: MyColors.black),
+        scaffoldBackgroundColor: MyColors.black
+      ),
       routes: mainNavigation.routes,
       initialRoute: mainNavigation.initialRoute(model.isAuth),
       onGenerateRoute: mainNavigation.onGenerateRoute,
     );
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
+        statusBarColor: MyColors.black,
         statusBarIconBrightness: Brightness.dark
     ));
     return app;
